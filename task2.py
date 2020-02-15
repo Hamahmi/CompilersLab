@@ -50,26 +50,29 @@ def create_dict(nfa_description):
     transition_function = dict()
     unique_states = set()
     for state in Z:
-        transition = state.split(",")
-        if transition_function.__contains__(transition[0] + "0"):
-            transition_function[transition[0] + "0"] += [transition[1]]
-        else:
-            transition_function[transition[0] + "0"] = [transition[1]]
-        unique_states.add(transition[0])
+        if len(state) > 0:
+            transition = state.split(",")
+            if transition_function.__contains__(transition[0] + "0"):
+                transition_function[transition[0] + "0"] += [transition[1]]
+            else:
+                transition_function[transition[0] + "0"] = [transition[1]]
+            unique_states.add(transition[0])
     for state in O:
-        transition = state.split(",")
-        if transition_function.__contains__(transition[0] + "1"):
-            transition_function[transition[0] + "1"] += [transition[1]]
-        else:
-            transition_function[transition[0] + "1"] = [transition[1]]
-        unique_states.add(transition[0])
+        if len(state) > 0:
+            transition = state.split(",")
+            if transition_function.__contains__(transition[0] + "1"):
+                transition_function[transition[0] + "1"] += [transition[1]]
+            else:
+                transition_function[transition[0] + "1"] = [transition[1]]
+            unique_states.add(transition[0])
     for state in E:
-        transition = state.split(",")
-        if transition_function.__contains__(transition[0]):
-            transition_function[transition[0]] += [transition[1]]
-        else:
-            transition_function[transition[0]] = [transition[1]]
-        unique_states.add(transition[0])
+        if len(state) > 0:
+            transition = state.split(",")
+            if transition_function.__contains__(transition[0]):
+                transition_function[transition[0]] += [transition[1]]
+            else:
+                transition_function[transition[0]] = [transition[1]]
+            unique_states.add(transition[0])
     return transition_function, accept_states, unique_states
 
 
@@ -92,7 +95,8 @@ def get_closure_state(closure, arr):
     tr = []
     for st in arr:
         tr += [st]
-        tr += closure[st]
+        if st in closure.keys():
+            tr += closure[st]
     return sorted(set(tr))
 
 
@@ -221,13 +225,13 @@ def check_valid_nfa(string):
     O = splitted[1].split(";")
     E = splitted[2].split(";")
     for z in Z:
-        if len(z.split(",")) != 2:
+        if len(z) > 0 and len(z.split(",")) != 2:
             return False
     for o in O:
-        if len(o.split(",")) != 2:
+        if len(o) > 0 and len(o.split(",")) != 2:
             return False
     for e in E:
-        if len(e.split(",")) != 2:
+        if len(e) > 0 and len(e.split(",")) != 2:
             return False
     return True
 
