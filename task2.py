@@ -7,7 +7,7 @@ parser = argparse.ArgumentParser(description="NFA")
 # in the pdf "0,0;1,2;3,3#0,0;0,1;2,3;3,3#1,2#3"
 parser.add_argument("--nfa", type=str, default="0,1;2,1#0,3;3,2#1,0;3,2#2")
 parser.add_argument("--str", type=str, default="11")
-parser.add_argument("--log", type=bool, default=False)
+parser.add_argument('--log', dest='log', action='store_true')
 args = parser.parse_args()
 
 
