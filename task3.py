@@ -79,17 +79,23 @@ def run(fdfa_description, input_string):
     output = ""
 
     while R < len(string_input):
+        if args.log:
+            print("String : " + string_input[R:])
         current_state = "0"
         stack.append(current_state)
         while L < len(string_input):
             alphabet = string_input[L]
             L += 1
+            if args.log:
+                print(current_state + " -- " + alphabet + " --> ", end="")
             current_state = transition_function[current_state + ";" + alphabet]
             stack.append(current_state)
-
+        if args.log:
+            print(current_state)
         if stack[-1] in accept_states:
             output += actions[stack[-1]]
             break
+
         else:
             ES = True
             qr = stack[-1]

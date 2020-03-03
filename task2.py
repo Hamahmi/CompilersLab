@@ -4,10 +4,9 @@ __author__ = "Hamahmi"
 import argparse
 
 parser = argparse.ArgumentParser(description="NFA")
-# in the pdf "0,0;1,2;3,3#0,0;0,1;2,3;3,3#1,2#3"
-parser.add_argument("--nfa", type=str, default="0,1;2,1#0,3;3,2#1,0;3,2#2")
+parser.add_argument("--nfa", type=str, default="0,0;1,2;3,3#0,0;0,1;2,3;3,3#1,2#3")
 parser.add_argument("--str", type=str, default="11")
-parser.add_argument('--log', dest='log', action='store_true')
+parser.add_argument("--log", dest="log", action="store_true")
 args = parser.parse_args()
 
 
@@ -154,6 +153,7 @@ def visualize(transition_function, staring_state, accept_states):
     import networkx as nx
     from networkx.drawing.nx_agraph import write_dot
     import os
+    import time
 
     G = nx.MultiDiGraph()
     for state in transition_function:
@@ -169,6 +169,8 @@ def visualize(transition_function, staring_state, accept_states):
     os.system("dot -Tpng graph.dot > graph.png")
     os.system("graph.png")
     os.system("del graph.dot")
+    time.sleep(1)
+    os.system("del graph.png")
 
 
 def run(nfa_description, string):
