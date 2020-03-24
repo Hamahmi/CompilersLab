@@ -29,9 +29,6 @@ def immediate(rule):
 def LRE(cfg_lre):
     cfg_lre = cfg_lre.replace(" ", "")
     rules = cfg_lre.split(";")
-    V = []
-    for i in range(len(rules)):
-        V.append(rules[i].split(",")[0])
     for i in range(len(rules)):
         for j in range(i):
             Ai = rules[i].split(",")
