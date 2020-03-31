@@ -7,7 +7,9 @@ import java.util.*;
  * Computer Lab) Connected to the course CSEN 1003 (Compiler) in the 10th
  * semester of computer science MET-GUC.
  * </p>
- * 
+ *
+ * T16_37_15881_Abdelrahman_Gharib_ElHamahmi
+ *
  * @author Hamahmi
  * @version 1.0
  * @since 2020-03-30
@@ -15,13 +17,12 @@ import java.util.*;
 
 public class task6 {
 
-///////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////
 	/**
 	 * This is the main method which makes use of {@link CFG#First()} and
 	 * {@link CFG#Follow()} methods.
-	 * 
+	 *
 	 * @param args Unused.
-	 * @return Nothing.
 	 * @see CFG
 	 */
 	public static void main(String[] args) {
@@ -32,14 +33,14 @@ public class task6 {
 		System.out.println("First: " + firstEncoding);
 		System.out.println("Follow: " + followEncoding);
 	}
-///////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////
 
 }
 
 /**
  * This is a helper class that creates CFG objects and computed First and Follow
  * sets of the created CFG object.
- * 
+ *
  * @author Hamahmi
  * @version 1.0
  * @since 2020-03-30
@@ -49,22 +50,18 @@ class CFG {
 
 	/**
 	 * V is an ArrayList of all variables in a CFG represented as characters
-	 * 
-	 * @see ArrayList
+	 *
 	 */
 	private ArrayList<Character> V;
 	/**
 	 * V is an ArrayList of all terminals in a CFG (Σ) represented as characters
-	 * 
-	 * @see ArrayList
+	 *
 	 */
 	private ArrayList<Character> terminals;
 	/**
-	 * R is an ArrayList of all rules in a CFG represented as an ArrayList of
-	 * strings where : the first element is the variables in the LHS and the seconds
-	 * element is what that variables goes to in the RHS of the rule.
-	 * 
-	 * @see ArrayList
+	 * R is an ArrayList of ArrayLists X representing CFG rules. Each X contains 2
+	 * strings A and B. A is the LHS and B is the RHS of the rule.
+	 *
 	 */
 	private ArrayList<ArrayList<String>> R;
 	/**
@@ -72,9 +69,7 @@ class CFG {
 	 * where the variable/terminal is represented as a character and it is used as a
 	 * key to an ArrayList of characters representing the elements of the First set
 	 * of that variable/terminal.
-	 * 
-	 * @see HashMap
-	 * @see ArrayList
+	 *
 	 */
 	private HashMap<Character, ArrayList<Character>> first;
 	/**
@@ -82,22 +77,20 @@ class CFG {
 	 * variable is represented as a character and it is used as a key to an
 	 * ArrayList of characters representing the elements of the Follow set of that
 	 * variable.
-	 * 
-	 * @see HashMap
-	 * @see ArrayList
+	 *
 	 */
 	private HashMap<Character, ArrayList<Character>> follow;
 
 	/**
 	 * This is the constructor for CFG class, it maps a string representation of a
 	 * CFG into a CFG object, and calls both ComputeFirst and ComputeFollow.
-	 * 
-	 * @param input This is a string encoding representation of a CFG where : A
-	 *              string encoding a CFG is a semi-colon-separated sequence of
-	 *              items. Each item represents a largest set of rules with the same
-	 *              left-hand side and is a comma-separated sequence of strings. The
-	 *              first string of each item is a member of V, representing the
-	 *              common left-hand side. The first string of the first item is S.
+	 *
+	 * @param input This is a string encoding representation of a CFG where a string
+	 *              encoding a CFG is a semi-colon-separated sequence of items. Each
+	 *              item represents a largest set of rules with the same left-hand
+	 *              side and is a comma-separated sequence of strings. The first
+	 *              string of each item is a member of V, representing the common
+	 *              left-hand side. The first string of the first item is S.
 	 * @see CFG#ComputeFirst()
 	 * @see CFG#ComputeFollow()
 	 */
@@ -131,10 +124,8 @@ class CFG {
 
 	/**
 	 * This method is used to compute First for all sentential forms of a CFG. and
-	 * save them into the global variable HashMap first.
-	 * 
-	 * @param Nothing.
-	 * @return Nothing.
+	 * save them into the global variable HashMap {@link CFG#first}.
+	 *
 	 * @see CFG#first
 	 */
 	private void ComputeFirst() {
@@ -233,10 +224,8 @@ class CFG {
 
 	/**
 	 * This method is used to compute Follow for all variables of a CFG. and save
-	 * them into the global variable HashMap follow.
-	 * 
-	 * @param Nothing.
-	 * @return Nothing.
+	 * them into the global variable HashMap {@link CFG#follow}.
+	 *
 	 * @see CFG#follow
 	 */
 	private void ComputeFollow() {
@@ -349,14 +338,11 @@ class CFG {
 	/**
 	 * This method is used to convert First of all variables in the CFG into a
 	 * string encoding.
-	 * 
-	 * @param Nothing.
-	 * @return String This returns a string encoding of the First of all variables
-	 *         in the following form : a semi-colon-separated sequence of items,
-	 *         where each item is a comma-separated pair. The first element of each
-	 *         pair is a variable of the grammar and the second element is a string
-	 *         representing the First set of that variable. The symbols in these
-	 *         strings appear in alphabetical order. ($ always appears last.)
+	 *
+	 * @return String This returns a string in the following format:
+	 *         "X1,Y1;X2,Y2;...Xn,Yn". X is a variable and Y is the First set of
+	 *         this variable. The string is ordered in alphabetical order. $ is the
+	 *         last element.
 	 * @see CFG#ComputeFirst()
 	 */
 	public String First() {
@@ -376,14 +362,11 @@ class CFG {
 	/**
 	 * This method is used to convert Follow of all variables in the CFG into a
 	 * string encoding.
-	 * 
-	 * @param Nothing.
-	 * @return String This returns a string encoding of the Follow of all variables
-	 *         in the following form : a semi-colon-separated sequence of items,
-	 *         where each item is a comma-separated pair. The first element of each
-	 *         pair is a variable of the grammar and the second element is a string
-	 *         representing the Follow set of that variable. The symbols in these
-	 *         strings appear in alphabetical order. ($ always appears last.)
+	 *
+	 * @return String This returns a string in the following format:
+	 *         "X1,Y1;X2,Y2;...Xn,Yn". X is a variable and Y is the Follow set of
+	 *         this variable. The string is ordered in alphabetical order. $ is the
+	 *         last element.
 	 * @see CFG#ComputeFollow()
 	 */
 	public String Follow() {
