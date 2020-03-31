@@ -7,7 +7,8 @@ __author__ = "Hamahmi"
 def immediate(rule):
     splitted = rule.split(",")
     A = splitted[0]
-    Ap = A + "′"
+    Ap = A + "'"
+    # Ap = A + "′" # cooler
     alphas = []
     betas = []
     for sentential in splitted[1:]:
