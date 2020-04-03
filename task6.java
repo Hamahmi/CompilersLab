@@ -283,8 +283,21 @@ class CFG {
 						ArrayList<Character> firstBeta = new ArrayList<Character>();
 						boolean next = true;
 						for (int j = 0; j < beta.length() && next; j++) {
-							firstBeta.addAll(first.get(beta.charAt(j)));
-							if (!first.get(beta.charAt(j)).contains('e')) {
+							ArrayList<Character> curCFirst = first.get(beta.charAt(j));
+							if (j == beta.length() - 1) {
+								// last terminal/Variable
+								firstBeta.addAll(curCFirst);
+							} else {
+								// if not last add current first - {epsilon}
+								// by the way, the method to get the sentential First
+								// was never mentioned in the lecture nor the tutorial
+								for (Character character : curCFirst) {
+									if (character != 'e') {
+										firstBeta.add(character);
+									}
+								}
+							}
+							if (!curCFirst.contains('e')) {
 								next = false;
 							}
 						}
