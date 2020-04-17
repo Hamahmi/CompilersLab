@@ -25,7 +25,7 @@ public class task7 {
 	 * sets of the created CFG object.
 	 *
 	 * @author Hamahmi
-	 * @version 1.0
+	 * @version 1.2
 	 * @since 2020-03-30
 	 * @see CFG#CFG(String)
 	 */
@@ -76,7 +76,7 @@ public class task7 {
 		private HashMap<Character, ArrayList<Character>> follow;
 
 		/**
-		 * TODO
+		 * M is the predictive parsing table for the CFG
 		 */
 		private HashMap<Character, HashMap<Character, String>> M;
 
@@ -88,6 +88,7 @@ public class task7 {
 		 *
 		 * @see CFG#ComputeFirst()
 		 * @see CFG#ComputeFollow()
+		 * @see CFG#ConstructTable()
 		 */
 		public CFG(String grammar) {
 			this.grammar = grammar;
@@ -121,7 +122,7 @@ public class task7 {
 
 		/**
 		 * This method is used to compute First for all sentential forms of a CFG. and
-		 * save them into the global variable HashMap {@link CFG#first}.
+		 * save them into the global variable {@link CFG#first}.
 		 *
 		 * @see CFG#first
 		 */
@@ -221,7 +222,7 @@ public class task7 {
 
 		/**
 		 * This method is used to compute Follow for all variables of a CFG. and save
-		 * them into the global variable HashMap {@link CFG#follow}.
+		 * them into the global variable {@link CFG#follow}.
 		 *
 		 * @see CFG#follow
 		 */
@@ -402,7 +403,10 @@ public class task7 {
 		}
 
 		/**
-		 * TODO
+		 * This method is used to construct the predictive parsing table of the CFG. and
+		 * save it into the global variable {@link CFG#M}.
+		 *
+		 * @see CFG#M
 		 */
 		private void ConstructTable() {
 			if (follow == null)
@@ -427,7 +431,6 @@ public class task7 {
 					if (j == alpha.length() - 1) {
 						// last terminal/Variable
 						if (curCFirst == null) {
-							// TODO not sure
 							// case -> e
 							firstAlpha.add('e');
 							next = false;
@@ -517,7 +520,6 @@ public class task7 {
 			stack.push(V.get(index++));
 			// let a be the first symbol of w;
 			char a = w.charAt(0);
-			// TODO handle e
 			char X = stack.peek();
 			// while ( X != $) { /* stack is not empty */
 			while (X != '$') {
