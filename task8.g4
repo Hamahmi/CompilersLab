@@ -4,16 +4,17 @@ grammar task8;
  import java.lang.Math;
 }
 
-start: s EOF;
+start: operation EOF;
 
 ///////////////////
 
+operation: s;
 s
 	returns[double val]:
 	l '.' r {$val = $l.val + $r.val;
     System.out.println($val);};
 l
-	returns[double n, double val]:
+	returns[int n, double val]:
 	b L1 = l { $n = $L1.n + 1; $val = $b.val * Math.pow(2, $n) + $L1.val;}
 	| b {$n = 0.0; $val = $b.val;};
 r
